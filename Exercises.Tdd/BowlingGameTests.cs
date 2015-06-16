@@ -64,6 +64,7 @@ namespace Exercises.Tdd
             Assert.That(game.Score, Is.EqualTo(20));
         }
 
+        [Ignore]
         [TestCase(4, Result = (3+7+4) + 4)]
         [TestCase(5, Result = (3+7+5) + 5)]
         public int ASimpleSpare(int extraRoll)
