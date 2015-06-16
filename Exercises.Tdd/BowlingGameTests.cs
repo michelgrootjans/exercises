@@ -51,7 +51,7 @@ namespace Exercises.Tdd
         [Test]
         public void GutterGame()
         {
-            for (int roll = 0; roll < 20; roll++)
+            for (var roll = 0; roll < 20; roll++)
                 game.Roll(0);
             Assert.That(game.Score, Is.EqualTo(0));
         }
@@ -59,12 +59,11 @@ namespace Exercises.Tdd
         [Test]
         public void RollAllOnes()
         {
-            for (int roll = 0; roll < 20; roll++)
+            for (var roll = 0; roll < 20; roll++)
                 game.Roll(1);
             Assert.That(game.Score, Is.EqualTo(20));
         }
 
-        [Ignore]
         [TestCase(4, Result = (3+7+4) + 4)]
         [TestCase(5, Result = (3+7+5) + 5)]
         public int ASimpleSpare(int extraRoll)

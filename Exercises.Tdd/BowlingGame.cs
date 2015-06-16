@@ -1,15 +1,23 @@
-﻿using System.Runtime.Versioning;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.Versioning;
+using NUnit.Framework;
 
 namespace Exercises.Tdd
 {
     public class BowlingGame
     {
-        public int Score { get; private set; }
+        private readonly List<int> rolls = new List<int>();
 
         public void Roll(int pins)
         {
-            Score += pins;
+            rolls.Add(pins);
         }
 
+        public int Score
+        {
+            get { return rolls.Sum(); }
+        }
     }
 }
