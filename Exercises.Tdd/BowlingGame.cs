@@ -36,23 +36,21 @@ namespace Exercises.Tdd
 
         private int FrameRollOne(int frame)
         {
-            
-            int index = (frame - 1)*2;
-            if (rolls.Count >= index + 1)
-            {
-                return rolls[index];
-            }
-            return 0;
+            var index = (frame - 1) * 2;
+            return RollAt(index);
         }
 
         private int FrameRollTwo(int frame)
         {
-            int index = (frame - 1) * 2 + 1;
-            if (rolls.Count >= index+1)
-            {
-                return rolls[index];
-            }
-            return 0;
+            var index = (frame - 1) * 2 + 1;
+            return RollAt(index);
+        }
+
+        private int RollAt(int index)
+        {
+            if (rolls.Count <= index )
+                return 0;
+            return rolls[index];
         }
     }
 }
