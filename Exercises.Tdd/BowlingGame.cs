@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Versioning;
-using NUnit.Framework;
+﻿using System.Collections.Generic;
 
 namespace Exercises.Tdd
 {
@@ -17,7 +13,6 @@ namespace Exercises.Tdd
 
         public int Score
         {
-
             get
             {
                 var score = 0;
@@ -31,16 +26,19 @@ namespace Exercises.Tdd
 
         private int ScoreFor(int frame)
         {
-            return FrameRollOne(frame) + FrameRollTwo(frame);
+            //if is spare
+            //return spare score
+            //else
+            return FirstRollOf(frame) + SecondRollOf(frame);
         }
 
-        private int FrameRollOne(int frame)
+        private int FirstRollOf(int frame)
         {
             var index = (frame - 1) * 2;
             return RollAt(index);
         }
 
-        private int FrameRollTwo(int frame)
+        private int SecondRollOf(int frame)
         {
             var index = (frame - 1) * 2 + 1;
             return RollAt(index);
@@ -48,9 +46,10 @@ namespace Exercises.Tdd
 
         private int RollAt(int index)
         {
-            if (rolls.Count <= index )
-                return 0;
-            return rolls[index];
+            if (index < rolls.Count) 
+                return rolls[index];
+           
+            return 0;
         }
     }
 }
