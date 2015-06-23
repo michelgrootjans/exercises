@@ -26,10 +26,16 @@ namespace Exercises.Tdd
 
         private int ScoreFor(int frame)
         {
-            //if is spare
-            //return spare score
-            //else
+            if (IsSpare(frame))
+            {
+                return FirstRollOf(frame) + SecondRollOf(frame) + FirstRollOf(frame + 1);
+            }
             return FirstRollOf(frame) + SecondRollOf(frame);
+        }
+
+        private bool IsSpare(int frame)
+        {
+            return FirstRollOf(frame) + SecondRollOf(frame) == 10;
         }
 
         private int FirstRollOf(int frame)

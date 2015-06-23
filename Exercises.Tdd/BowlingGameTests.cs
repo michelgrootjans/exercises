@@ -74,6 +74,15 @@ namespace Exercises.Tdd
             return game.Score;
         }
 
+        [Test]
+        public void RunAllFives()
+        {
+            for (var i = 0; i < 21; i++)
+                game.Roll(5);
+            Assert.That(game.Score, Is.EqualTo(150));
+        }
+
+
 
     }
 }
