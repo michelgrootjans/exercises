@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercises.Tdd
 {
@@ -9,6 +10,8 @@ namespace Exercises.Tdd
         public void Roll(int pins)
         {
             rolls.Add(pins);
+            if (WeJustRolledAStrike())
+                rolls.Add(0);
         }
 
         public int Score
@@ -26,11 +29,30 @@ namespace Exercises.Tdd
 
         private int ScoreFor(int frame)
         {
+            if (IsStrike(frame))
+                return FirstRollOf(frame) + FirstRollAfter(frame) + SecondRollAfter(frame);
+            
             if (IsSpare(frame))
-            {
-                return FirstRollOf(frame) + SecondRollOf(frame) + FirstRollOf(frame + 1);
-            }
+                return FirstRollOf(frame) + SecondRollOf(frame) + FirstRollAfter(frame);
+            
             return FirstRollOf(frame) + SecondRollOf(frame);
+        }
+
+        private int FirstRollAfter(int frame)
+        {
+            return FirstRollOf(frame + 1);
+        }
+
+        private int SecondRollAfter(int frame)
+        {
+            if (IsStrike(frame + 1))
+                return FirstRollOf(frame + 2);
+            return SecondRollOf(frame + 1);
+        }
+
+        private bool IsStrike(int frame)
+        {
+            return FirstRollOf(frame) == 10;
         }
 
         private bool IsSpare(int frame)
@@ -41,7 +63,8 @@ namespace Exercises.Tdd
         private int FirstRollOf(int frame)
         {
             var index = (frame - 1) * 2;
-            return RollAt(index);
+            var firstRollOf = RollAt(index);
+            return firstRollOf;
         }
 
         private int SecondRollOf(int frame)
@@ -52,10 +75,16 @@ namespace Exercises.Tdd
 
         private int RollAt(int index)
         {
-            if (index < rolls.Count) 
+            if (index < rolls.Count)
                 return rolls[index];
-           
+
             return 0;
         }
+
+        private bool WeJustRolledAStrike()
+        {
+            return rolls.Count % 2 == 1 && rolls.Last() == 10;
+        }
+
     }
 }
